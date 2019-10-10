@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="index" class=" container " style="background-color: rgb(210, 221, 223);" id="		">
+    <ul class="nav navbar-nav">
+        <li>
+            <a th:href="@{/}">User Login</a>
+        </li>
+        <li>
+            <a th:href="@{/admin-login}">Admin Login</a>
+        </li>
+        <li>
+            <a th:href="@{/police-login}">Police login</a>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>
