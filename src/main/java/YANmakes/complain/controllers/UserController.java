@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //@RequestMapping("/")
 public class UserController {
 
-//    @GetMapping("/user-login")
-//    public String loginPolice(){
-//        return "police/police-index";
-//    }
+    @GetMapping("/new-user")
+    public String newUser(){
+        return "user/registration";
+    }
 
 //    @GetMapping("/complain-details")
 //    public String hello(){
