@@ -73,7 +73,7 @@ blockquote small::before {
 .text-muted {color: #999;}
 .wrapper {
 	background: url(../images/bg.png) #eee;
-	border-bottom: 1px solid #bbb;
+	border-bottom: 0px solid #bbb;
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 	box-shadow: 0 1px 2px rgba(0,0,0,0.1);
@@ -81,7 +81,14 @@ blockquote small::before {
 }
 .footer {
 	color: #999;
-	padding: 30px 0 60px
+	padding: 20px 0 20px;
+	position: fixed;
+	bottom: 0px;
+	background-color: rgba(207, 219, 244, 0.85);
+	width: 100%;
+	height: 1rem;
+	box-shadow: black;
+
 }
 .footer .nav li {
 	float: left
@@ -154,7 +161,11 @@ body [class^="icon-"], body [class*=" icon-"] {
 	-webkit-box-shadow: 0 0 1px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0 0 1px rgba(0,0,0,0.2);
 	box-shadow: 0 0 1px rgba(0,0,0,0.2);
-	margin-bottom: 30px
+	margin-bottom: 30px;
+	padding: 20px 40px;
+}
+.form-control1{
+	width: 800px;
 }
 .align-center {
 	text-align: center
@@ -1117,8 +1128,8 @@ border-top-left-radius: 3px;
 	padding: 0
 }
 .stream.new-update a, .stream.load-more a {
-	background: #background: #f7f7f7;;
-	
+	background: #f7f7f7;;
+
 	color: #555;
 	font-weight: 600;
 	font-size: 14px;

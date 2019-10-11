@@ -18,6 +18,12 @@
 	<link href="user/assets/css/style-responsive.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+	<style>
+		.error{
+			color:red;
+		}
+	</style>
+
 </head>
 
 <body>
@@ -27,23 +33,24 @@
 		<div class="container">
 
 
-			<form class="form-login" method="post" th:action="@{/new-user}">
+			<form id="register" class="form-login" method="post" th:action="@{/new-user}">
 				<h2 class="form-login-heading">User Registration</h2>
 				<!-- <p style="padding-left: 1%; color: green">
 				</p> -->
 				<div class="login-wrap">
-					<input type="text" class="form-control" placeholder="Full Name" name="name" required="required" autofocus>
+					<input type="text" class="form-control" placeholder="Full Name" name="name"  autofocus>
 					<br>
-					<input type="email" class="form-control" placeholder="Email Address" id="email" onBlur="userAvailability()" name="email"
-						   required="required">
+					<input type="email" class="form-control" placeholder="Email Address" id="email" onBlur="userAvailability()" name="email">
 					<span id="email-error" class="text-danger" style="font-size:12px;"></span>
 					<br>
-					<input type="password" class="form-control" placeholder="Password" required="required" name="password"><br>
-					<input type="text" class="form-control" maxlength="10" name="contactNo" placeholder="Contact no" required="required"
-						   autofocus>
+					<input type="password" class="form-control" placeholder="Password" id="password" name="password"><br>
+
+					<input type="password" class="form-control" placeholder="Confirm Password" id="confirm_password" name="confirm_password"><br>
+
+					<input type="text" class="form-control" maxlength="10" name="contactNo" placeholder="Contact no" autofocus>
 					<br>
 
-					<select type="gender" class="form-control" placeholder="Gender" id="gender" name="gender" required="required">
+					<select type="gender" class="form-control" placeholder="Gender" id="gender" name="gender" >
 						<option th:each="gender : ${genderType}"
 								th:text="${gender.value}"
 								th:value="${gender}">Male</option>
@@ -51,8 +58,7 @@
 					</select>
 					<span id="user-availability-status1" style="font-size:12px;"></span>
 					<br>
-					<input type="city" class="form-control" placeholder="City" id="city" onBlur="userAvailability()" name="city"
-						   required="required">
+					<input type="city" class="form-control" placeholder="City" id="city" onBlur="userAvailability()" name="city">
 					<span id="user-availability-status1" style="font-size:12px;"></span>
 					<br>
 
@@ -78,6 +84,8 @@
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/validator/jquery.validate.min.js"></script>
+	<script src="assets/js/validator/register-validator.js"></script>
 
 	<!--BACKSTRETCH-->
 	<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
