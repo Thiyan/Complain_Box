@@ -27,10 +27,14 @@ public class ComplainService {
     @Autowired
     private ModelMapper getMapper;
 
+    List<ComplainDTO> complainDTOS;
+
+
+
 
     public List<ComplainDTO> getComplainsByPolice(String id, String status) {
 
-        List<ComplainDTO> complainDTOS=new ArrayList<>();
+        complainDTOS=new ArrayList<>();
 
         List<Complain> complains= (List<Complain>) complainDAO.findAllByPolicePoliceIdAndStatus(Integer.parseInt(id),status);
 
@@ -63,5 +67,27 @@ public class ComplainService {
         return complainDTO;
 
 
+    }
+
+    public List<ComplainDTO> getComplainsByAdmin(String status) {
+
+
+        complainDTOS=new ArrayList<>();
+
+        List<Complain> complains= (List<Complain>) complainDAO.findByStatus(status);
+
+
+        if(complains.isEmpty())
+            System.out.println("Empty");
+
+        for(Complain complain : complains){
+            System.out.println("Reached");
+            ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
+            complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
+            System.out.println(complainDTO.toString());
+            complainDTOS.add(complainDTO);
+        }
+
+        return complainDTOS;
     }
 }

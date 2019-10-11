@@ -44,26 +44,24 @@
 											<th>Police ID</th>
 											<th> Name</th>
 											<th>Email </th>
+											<th>Gender </th>
 											<th>Contact no</th>
-											<th>Reg. Date </th>
 											<th>City</th>
 											<th>Action</th>
-											<!-- <th>Action</th> -->
 
 										</tr>
 									</thead>
 									<tbody>
 
 
-										<tr>
+										<tr th:each="police : ${polices}">
 											<td>1</td>
-											<td>001525</td>
-											<td>fullName</td>
-											<td>userEmail</td>
-											<td> contactNo</td>
-
-											<td>regDate</td>
-											<td>colombo</td>
+											<td th:text="${police.policeId}"></td>
+											<td th:text="${police.name}"></td>
+											<td th:text="${police.email}">userEmail</td>
+											<td th:text="${police.gender}">userEmail</td>
+											<td th:text="${police.contactNo}">userEmail</td>
+											<td th:text="${police.city}">userEmail</td>
 
 											<td class="center">
 												<a href="edit-police.html" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>

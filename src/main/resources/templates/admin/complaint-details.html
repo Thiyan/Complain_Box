@@ -42,19 +42,19 @@
 
 										<tr>
 											<td><b>Complaint Number</b></td>
-											<td colspan="5">153</td>
+											<td th:text="${complain.complainId}" colspan="5"></td>
 
 
 										</tr>
 
 										<tr>
-											<td><b>Complainant Name</b></td>
-											<td colspan="5"> test</td>
+											<td><b>Complainant Subject</b></td>
+											<td th:text="${complain.subject}" colspan="5"></td>
 										</tr>
 
 										<tr>
 											<td><b>Reg Date</b></td>
-											<td colspan="5">15/25/2125
+											<td th:text="${complain.date}" colspan="5">15/25/2125
 											</td>
 										</tr>
 
@@ -62,16 +62,10 @@
 
 
 										</tr>
-										<tr>
-											<td><b>Place </b></td>
-											<td colspan="5" >colombo</td>
-
-
-										</tr>
 										<tr >
 											<td ><b>Complaint Details </b></td>
 
-											<td colspan="5" >sss</td> 
+											<td th:text="${complain.description}" colspan="5" >sss</td>
 
 										</tr>
 
@@ -94,12 +88,8 @@
 											<td colspan="5"> remark officer</td>
 										</tr>
 										<tr>
-											<td><b>Approve</b></td>
-											<td colspan="5">yes</td>
-										</tr>
-										<tr>
 											<td><b>Status</b></td>
-											<td colspan="5">not process</td>
+											<td th:text="${complain.status}" colspan="5"></td>
 										</tr>
 
 										<tr>

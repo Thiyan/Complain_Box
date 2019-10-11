@@ -1,6 +1,7 @@
 package YANmakes.complain.controllers;
 
 import YANmakes.complain.services.ComplainService;
+import YANmakes.complain.services.PoliceService;
 import YANmakes.complain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 //@RequestMapping("/police")
@@ -18,6 +22,9 @@ public class PoliceController {
 
     @Autowired
     private ComplainService complainService;
+
+    @Autowired
+    private PoliceService policeService;
 
     @GetMapping("/police-login")
     public String loginPolice(){
@@ -50,6 +57,18 @@ public class PoliceController {
 
         model.addAttribute("users",userService.getAllUsers());
         return "police/manage-users";
+    }
+
+    @GetMapping("/validate-police-email")
+    @ResponseBody
+    public String validateEmail(HttpServletRequest request){
+        System.out.println("Triggered");
+        String email=request.getParameter("email");
+
+        if(email.equals("") || email==null)
+            return "Email must not be empty";
+
+        return policeService.validateEmail(email);
     }
 
 

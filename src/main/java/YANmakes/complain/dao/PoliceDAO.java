@@ -8,4 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface PoliceDAO extends CrudRepository<Police,Integer> {
+    boolean existsByEmail(String email);
 }
