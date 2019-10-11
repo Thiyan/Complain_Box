@@ -43,7 +43,6 @@
 											<th> Name</th>
 											<th>Email </th>
 											<th>Contact no</th>
-											<th>Reg. Date </th>
 											<th>Gender</th>
 											<th>City</th>
 											<!-- <th>Action</th> -->
@@ -53,15 +52,13 @@
 									<tbody>
 
 
-										<tr>
-											<td>1</td>
-											<td>fullName</td>
-											<td>userEmail</td>
-											<td> contactNo</td>
-
-											<td>regDate</td>
-											<td>male</td>
-											<td>colombo</td>
+										<tr th:each="user,iterator : ${users}" >
+											<td th:text="${iterator.index}"></td>
+											<td th:text="${user.name}"></td>
+											<td th:text="${user.email}"></td>
+											<td th:text="${user.contactNo}"></td>
+											<td th:text="${user.gender}"></td>
+											<td th:text="${user.city}"></td>
 
 											<!-- <td><a href="javascript:void(0);" onClick="popUpWindow('userprofile.html');" title="View Details">
 													<button type="button" class="btn btn-primary">View Detials</button>
@@ -70,7 +67,7 @@
 													<button type="button" class="btn btn-danger">Delete</button></a>
 
 											</td> -->
-
+										</tr>
 
 								</table>
 							</div>

@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "police")
-public class Police {
+@Table(name = "user")
+public class User {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int policeId;
+    private int userId;
 
     @Column(name = "name")
     private String name;
@@ -31,13 +31,13 @@ public class Police {
     private String password;
 
     @OneToMany
-    @JoinColumn(name = "police_id")
+    @JoinColumn(name = "user_id")
     private List<Complain> complains;
 
-    public Police() {
+    public User() {
     }
 
-    public Police(String name, String gender, String email, String contactNo, String city, String password) {
+    public User(String name, String gender, String email, String contactNo, String city, String password) {
         this.name = name;
         this.gender = gender;
         this.email = email;
@@ -46,12 +46,12 @@ public class Police {
         this.password = password;
     }
 
-    public int getPoliceId() {
-        return policeId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setPoliceId(int policeId) {
-        this.policeId = policeId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -102,10 +102,18 @@ public class Police {
         this.password = password;
     }
 
+    public List<Complain> getComplains() {
+        return complains;
+    }
+
+    public void setComplains(List<Complain> complains) {
+        this.complains = complains;
+    }
+
     @Override
     public String toString() {
-        return "Police{" +
-                "policeId=" + policeId +
+        return "User{" +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +

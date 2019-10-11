@@ -1,57 +1,43 @@
-package YANmakes.complain.models;
+package YANmakes.complain.dto;
 
-import javax.persistence.*;
-import java.util.List;
+import YANmakes.complain.utils.Gender;
+import org.springframework.stereotype.Component;
 
-@Entity
-@Table(name = "police")
-public class Police {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private int policeId;
+@Component
+public class UserDTO {
 
-    @Column(name = "name")
-    private String name;
+    private int userId;
 
-    @Column(name = "gender")
-    private String gender;
+    @NotNull
+    public String name;
 
-    @Column(name = "email")
+    @NotNull
+    private Gender gender;
+
+    @NotNull
     private String email;
 
-    @Column(name = "contact")
+    @NotNull
     private String contactNo;
 
-    @Column(name = "city")
+    @NotNull
     private String city;
 
-    @Column(name = "password")
+    @Size(min = 6, max = 15, message = "Give a valid password")
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "police_id")
-    private List<Complain> complains;
-
-    public Police() {
+    public UserDTO() {
     }
 
-    public Police(String name, String gender, String email, String contactNo, String city, String password) {
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.contactNo = contactNo;
-        this.city = city;
-        this.password = password;
+    public int getUserId() {
+        return userId;
     }
 
-    public int getPoliceId() {
-        return policeId;
-    }
-
-    public void setPoliceId(int policeId) {
-        this.policeId = policeId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -62,11 +48,11 @@ public class Police {
         this.name = name;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -104,13 +90,14 @@ public class Police {
 
     @Override
     public String toString() {
-        return "Police{" +
-                "policeId=" + policeId +
+        return "UserDTO{" +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
+                ", gender=" + gender +
                 ", email='" + email + '\'' +
                 ", contactNo='" + contactNo + '\'' +
                 ", city='" + city + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

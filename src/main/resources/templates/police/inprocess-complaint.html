@@ -35,12 +35,10 @@
 							
 								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" >
 									<thead>
-										<tr>
+										<tr >
 											<th>Complaint No</th>
-											<th> complainant Name</th>
+											<th>complainant Subjet</th>
 											<th>Reg Date</th>
-											<th>Police</th>
-											<th>Approve</th>
 											<th>Status</th>
 											
 											<th>Action</th>
@@ -49,17 +47,15 @@
 										</tr>
 									</thead>
 								
-<tbody>
+									<tbody>
 									
-										<tr>
-											<td>complaintNumber</td>
-											<td>name</td>
-											<td>regDate</td>
-											<td>Police name 1</td>
-											<td>Yes</td>
-											<td>Closed</td>
+										<tr th:each="complain : ${complains}">
+											<td th:text="${complain.complainId}"></td>
+											<td th:text="${complain.subject}"></td>
+											<td th:text="${complain.date}"></td>
+											<td th:text="${complain.status}"></td>
 
-											<td>   <a th:href="@{/complain-details}"> View Details</a>
+											<td>   <a th:href="@{/complain-details(id=${complain.complainId})}"> View Details</a>
 											</td>
 											</tr>
 											
