@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
 public class AdminController {
 
     @GetMapping("/admin-login")
@@ -13,37 +13,37 @@ public class AdminController {
         return "admin/admin-index";
     }
 
-    @RequestMapping("/new-complains")
+    @RequestMapping("/admin-new-complains")
     public String newComplains(){
         return "admin/notprocess-complaint";
     }
 
-    @RequestMapping("/ongoing-complains")
+    @RequestMapping("/admin-ongoing-complains")
     public String ongoingComplainAdmin(){
         return "admin/inprocess-complaint";
     }
 
-    @RequestMapping("/closed-complains")
+    @RequestMapping("/admin-closed-complains")
     public String closedComplain(){
         return "admin/closed-complaint";
     }
 
-    @RequestMapping("/manage-users")
+    @RequestMapping("/admin-manage-users")
     public String manageUsers(){
         return "admin/manage-users";
     }
 
-    @RequestMapping("/add-police")
+    @RequestMapping("/admin-add-police")
     public String addPolice(){
         return "admin/add-police";
     }
 
-    @RequestMapping("/manage-police")
+    @RequestMapping("/admin-manage-police")
     public String managePolice(){
         return "admin/manage-police";
     }
 
-    @RequestMapping("/complain-details")
+    @RequestMapping("/admin-complain-details")
     public String complainDetails(){
         return "admin/complaint-details";
     }

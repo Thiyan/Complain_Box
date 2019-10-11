@@ -11,15 +11,16 @@
 
     <title>CMS | User Login</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="user/assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="user/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-    <!-- Custom styles for this template -->
-    <link href="user/assets/css/style.css" rel="stylesheet">
-    <link href="user/assets/css/style-responsive.css" rel="stylesheet">
-<script type="text/javascript">
+	  <!-- Bootstrap core CSS -->
+	  <link th:href="@{/user/assets/css/bootstrap.css}" rel="stylesheet">
+	  <!--external css-->
+	  <link th:href="@{/user/assets/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+
+	  <!-- Custom styles for this template -->
+	  <link th:href="@{/user/assets/css/style.css}" rel="stylesheet">
+	  <link th:href="@{/user/assets/css/style-responsive.css}" rel="stylesheet">
+
+	  <script type="text/javascript">
 function valid()
 {
  if(document.forgot.password.value!= document.forgot.confirmpassword.value)

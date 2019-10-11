@@ -8,20 +8,45 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-//@RequestMapping("/")
+//@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/user-new-complain")
+    public String newComplain(Model model){
+
+//        model.addAttribute("user", new UserDTO());
+        return "user/register-complaint";
+    }
+
+    @GetMapping("/user-ongoing-complains")
+    public String ongoingComplainsUser(Model model){
+
+//        model.addAttribute("user", new UserDTO());
+        return "user/inprocess-complaint";
+    }
+
+    @GetMapping("/user-closed-complains")
+    public String closedComplainsUser(Model model){
+
+//        model.addAttribute("user", new UserDTO());
+        return "user/closed-complaint";
+    }
+
+    @GetMapping("/user-complain-details")
+    public String complainsDetailsUser(Model model){
+
+//        model.addAttribute("user", new UserDTO());
+        return "user/complaint-details";
+    }
 
     @GetMapping("/new-user")
     public String newUser(Model model){

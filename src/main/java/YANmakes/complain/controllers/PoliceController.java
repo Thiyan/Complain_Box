@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-//@RequestMapping("/")
+//@RequestMapping("/police")
 public class PoliceController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class PoliceController {
         return "police/police-index";
     }
 
-    @GetMapping("/complain-details")
+    @GetMapping("/police-complain-details")
     public String ComplainDetail(@RequestParam("id") String id,Model model){
 
         System.out.println(id);
@@ -32,20 +32,20 @@ public class PoliceController {
         return "police/complaint-details";
     }
 
-    @RequestMapping("/ongoing-complains")
+    @RequestMapping("/police-ongoing-complains")
     public String ongoingComplain(@RequestParam("id") String id,Model model){
         model.addAttribute("complains",complainService.getComplainsByPolice(id,"Pending"));
         return "police/inprocess-complaint";
     }
 
-    @RequestMapping("/closed-complains")
+    @RequestMapping("/police-closed-complains")
     public String closedComplain(@RequestParam("id") String id,Model model){
         model.addAttribute("complains",complainService.getComplainsByPolice(id,"Closed"));
 
         return "police/closed-complaint";
     }
 
-    @RequestMapping("/view-users")
+    @RequestMapping("/police-view-users")
     public String viewUsers(Model model){
 
         model.addAttribute("users",userService.getAllUsers());

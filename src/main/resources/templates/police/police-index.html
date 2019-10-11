@@ -12,13 +12,14 @@
     <title>Police | User Login</title>
 
 	  <!-- Bootstrap core CSS -->
-	  <link href="user/assets/css/bootstrap.css" rel="stylesheet">
+	  <link th:href="@{/user/assets/css/bootstrap.css}" rel="stylesheet">
 	  <!--external css-->
-	  <link href="user/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	  <link th:href="@{/user/assets/font-awesome/css/font-awesome.css}" rel="stylesheet" />
 
 	  <!-- Custom styles for this template -->
-	  <link href="user/assets/css/style.css" rel="stylesheet">
-	  <link href="user/assets/css/style-responsive.css" rel="stylesheet">
+	  <link th:href="@{/user/assets/css/style.css}" rel="stylesheet">
+	  <link th:href="@{/user/assets/css/style-responsive.css}" rel="stylesheet">
+
 <script type="text/javascript">
 function valid()
 {
@@ -35,14 +36,10 @@ return true;
 
   <body >
 
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-	  <div th:replace="index-fragments :: index"></div>
+  <div th:replace="index-fragments :: index"></div>
 
 
-
-	  <div id="login-page">
+  <div id="login-page">
 	  	<div class="container">
 	  	
 		      <form class="form-login" name="login" method="post">
@@ -102,16 +99,16 @@ return true;
 	  	</div>
 	  </div>
 
-	  <!-- js placed at the end of the document so the pages load faster -->
-	  <script src="user/assets/js/jquery.js"></script>
-	  <script src="user/assets/js/bootstrap.min.js"></script>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="user/assets/js/jquery.js"></script>
+    <script src="user/assets/js/bootstrap.min.js"></script>
 
-	  <!--BACKSTRETCH-->
-	  <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
-	  <script type="text/javascript" src="user/assets/js/jquery.backstretch.min.js"></script>
-	  <script>
-		  $.backstretch("user/assets/img/login-bg.jpg", {speed: 500});
-	  </script>
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="user/assets/js/jquery.backstretch.min.js"></script>
+    <script>
+		$.backstretch("@{/user/assets/img/login-bg.jpg}", { speed: 500 });
+    </script>
 
 
   </body>
