@@ -5,32 +5,47 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-//@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminController {
 
     @GetMapping("/admin-login")
-    public String loginPolice(){
+    public String loginAdmin(){
         return "admin/admin-index";
     }
 
-//    @GetMapping("/complain-details")
-//    public String hello(){
-//        return "police/complaint-details";
-//    }
-//
-//    @RequestMapping("/ongoing-complains")
-//    public String ongoingComplain(){
-//        return "police/inprocess-complaint";
-//    }
-//
-//    @RequestMapping("/closed-complains")
-//    public String closedComplain(){
-//        return "police/closed-complaint";
-//    }
-//
-//    @RequestMapping("/view-users")
-//    public String viewUsers(){
-//        return "police/manage-users";
-//    }
+    @RequestMapping("/new-complains")
+    public String newComplains(){
+        return "admin/notprocess-complaint";
+    }
+
+    @RequestMapping("/ongoing-complains")
+    public String ongoingComplainAdmin(){
+        return "admin/inprocess-complaint";
+    }
+
+    @RequestMapping("/closed-complains")
+    public String closedComplain(){
+        return "admin/closed-complaint";
+    }
+
+    @RequestMapping("/manage-users")
+    public String manageUsers(){
+        return "admin/manage-users";
+    }
+
+    @RequestMapping("/add-police")
+    public String addPolice(){
+        return "admin/add-police";
+    }
+
+    @RequestMapping("/manage-police")
+    public String managePolice(){
+        return "admin/manage-police";
+    }
+
+    @RequestMapping("/complain-details")
+    public String complainDetails(){
+        return "admin/complaint-details";
+    }
 }
 
