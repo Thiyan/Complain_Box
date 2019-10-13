@@ -5,6 +5,7 @@ import YANmakes.complain.dao.PoliceDAO;
 import YANmakes.complain.dao.UserDAO;
 import YANmakes.complain.dto.Assign;
 import YANmakes.complain.dto.ComplainDTO;
+import YANmakes.complain.dto.Evidence;
 import YANmakes.complain.dto.UserDTO;
 import YANmakes.complain.models.Complain;
 import YANmakes.complain.models.Police;
@@ -29,6 +30,9 @@ public class ComplainService {
 
     @Autowired
     private PoliceDAO policeDAO;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private ModelMapper getMapper;
@@ -147,6 +151,27 @@ public class ComplainService {
         complain.setStatus(ComplainStatus.REJECTED.getValue());
 
         complainDAO.save(complain);
+        return true;
+
+    }
+
+    public boolean addEvidence(Evidence evidence) {
+        System.out.println("Trigger");
+        Complain complain=complainDAO.findByComplainId(evidence.getComplainId());
+
+        System.out.println("Pass");
+
+        if(complain==null)
+            return false;
+
+        complain.setStatus(ComplainStatus.CLOSED.getValue());
+
+        complain.setOfficerRemark(evidence.getOfficerRemarks());
+
+        complain.setDocument(userService.storeImage(evidence.getDocument()));
+
+        complainDAO.save(complain);
+
         return true;
 
     }

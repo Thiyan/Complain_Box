@@ -91,12 +91,9 @@
 
 											<td>
 
-												<a href="javascript:void(0);" onClick="popUpWindow('updatecomplaint.html');" title="Update order">
-													<button type="button" class="btn btn-primary">Take Action</button></td>
+													<a th:href="@{/add-evidence(complainId=${complain.complainId})}" type="button" class="btn btn-primary">Add Evidence</a></td>
 											</a></td>
-											<td colspan="4">
-												<a href="javascript:void(0);" onClick="popUpWindow('userprofile.html');" title="Update order">
-													<button type="button" class="btn btn-primary">View User Detials</button></a></td>
+
 
 										</tr>
 

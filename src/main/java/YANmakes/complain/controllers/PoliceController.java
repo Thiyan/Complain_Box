@@ -1,17 +1,19 @@
 package YANmakes.complain.controllers;
 
+import YANmakes.complain.dto.Assign;
+import YANmakes.complain.dto.Evidence;
 import YANmakes.complain.services.ComplainService;
 import YANmakes.complain.services.PoliceService;
 import YANmakes.complain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 //@RequestMapping("/police")
@@ -50,6 +52,32 @@ public class PoliceController {
         model.addAttribute("complains",complainService.getComplainsByPolice(id,"Closed"));
 
         return "police/closed-complaint";
+    }
+
+
+    @RequestMapping("/add-evidence")
+    public String assignPolice(@RequestParam int complainId, Model model){
+
+        model.addAttribute("complainId",complainId);
+        return "police/add-evidence";
+    }
+
+    @PostMapping("/add-evidence")
+    public String assignEvidenceProcessing(@Valid Evidence evidence, RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model){
+
+        System.out.println(evidence.toString());
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("success",false);
+            return "redirect:/police-complain-details?id="+evidence.getComplainId();
+        }
+
+        if(!complainService.addEvidence(evidence)){
+            redirectAttributes.addFlashAttribute("success",false);
+            return "redirect:/assign-police";
+        }
+
+        redirectAttributes.addFlashAttribute("success",true);
+        return "redirect:/admin-new-complains";
     }
 
     @RequestMapping("/police-view-users")

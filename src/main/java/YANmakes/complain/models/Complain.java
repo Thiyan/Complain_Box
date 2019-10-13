@@ -29,6 +29,12 @@ public class Complain {
     @Column(name = "remark")
     private String remark;
 
+    @Column(name = "office_remark")
+    private String OfficerRemark;
+
+    @Column(name = "document")
+    private String document;
+
     @ManyToOne
     private User user;
 
@@ -38,16 +44,20 @@ public class Complain {
     public Complain() {
     }
 
-    public Complain(String subject, String description, String date, String status, String file, String remark, User user, Police police) {
+    public Complain(String subject, String description, String date, String status, String file,
+                    String remark, String officerRemark, String document, User user, Police police) {
         this.subject = subject;
         this.description = description;
         this.date = date;
         this.status = status;
         this.file = file;
         this.remark = remark;
+        OfficerRemark = officerRemark;
+        this.document = document;
         this.user = user;
         this.police = police;
     }
+
 
     public int getComplainId() {
         return complainId;
@@ -121,6 +131,22 @@ public class Complain {
         this.remark = remark;
     }
 
+    public String getOfficerRemark() {
+        return OfficerRemark;
+    }
+
+    public void setOfficerRemark(String officerRemark) {
+        OfficerRemark = officerRemark;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
     @Override
     public String toString() {
         return "Complain{" +
@@ -130,6 +156,9 @@ public class Complain {
                 ", date='" + date + '\'' +
                 ", status='" + status + '\'' +
                 ", file='" + file + '\'' +
+                ", remark='" + remark + '\'' +
+                ", OfficerRemark='" + OfficerRemark + '\'' +
+                ", document='" + document + '\'' +
                 ", user=" + user +
                 ", police=" + police +
                 '}';
