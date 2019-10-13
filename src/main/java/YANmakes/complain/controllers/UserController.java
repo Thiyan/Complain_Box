@@ -2,6 +2,7 @@ package YANmakes.complain.controllers;
 
 import YANmakes.complain.dto.ComplainDTO;
 import YANmakes.complain.dto.UserDTO;
+import YANmakes.complain.services.ComplainService;
 import YANmakes.complain.services.UserService;
 import YANmakes.complain.utils.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 //@RequestMapping("/user")
@@ -21,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ComplainService complainService;
 
     @GetMapping("/user-new-complain")
     public String newComplain(Model model){
@@ -44,16 +50,19 @@ public class UserController {
     }
 
     @GetMapping("/user-ongoing-complains")
-    public String ongoingComplainsUser(Model model){
+    public String ongoingComplainsUser(@RequestParam("id") int id,Model model){
 
-//        model.addAttribute("user", new UserDTO());
+
+        model.addAttribute("complains", complainService.getComplainsByUser(id,"Pending"));
+
         return "user/inprocess-complaint";
     }
 
     @GetMapping("/user-closed-complains")
-    public String closedComplainsUser(Model model){
+    public String closedComplainsUser(@RequestParam("id") int id, Model model){
 
-//        model.addAttribute("user", new UserDTO());
+        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"Closed"),
+                complainService.getComplainsByUser(id,"Rejected")));
         return "user/closed-complaint";
     }
 
@@ -94,6 +103,17 @@ public class UserController {
             return "Email must not be empty";
 
         return userService.validateEmail(email);
+    }
+
+    // Generic function to join two lists in Java
+    public <T> List<T> merge(List<T> list1, List<T> list2)
+    {
+        List<T> list = new ArrayList<>();
+
+        list.addAll(list1);
+        list.addAll(list2);
+
+        return list;
     }
 
 

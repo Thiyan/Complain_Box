@@ -51,6 +51,25 @@ public class ComplainService {
         return complainDTOS;
 
 
+    }    public List<ComplainDTO> getComplainsByUser(int id, String status) {
+
+        complainDTOS=new ArrayList<>();
+
+        List<Complain> complains= (List<Complain>) complainDAO.findAllByUserUserIdAndStatus(id,status);
+
+        if(complains.isEmpty())
+            return complainDTOS;
+
+        for(Complain complain : complains){
+            System.out.println("Reached");
+            ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
+            complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
+            complainDTOS.add(complainDTO);
+        }
+
+        return complainDTOS;
+
+
     }
 
     public ComplainDTO getComplain(String id) {
