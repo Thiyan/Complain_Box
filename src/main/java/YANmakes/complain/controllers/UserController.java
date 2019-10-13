@@ -1,5 +1,6 @@
 package YANmakes.complain.controllers;
 
+import YANmakes.complain.dto.ComplainDTO;
 import YANmakes.complain.dto.UserDTO;
 import YANmakes.complain.services.UserService;
 import YANmakes.complain.utils.Gender;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -25,6 +27,20 @@ public class UserController {
 
 //        model.addAttribute("user", new UserDTO());
         return "user/register-complaint";
+    }
+
+    @PostMapping("/user-new-complain")
+    public String newComplainProcess(@Valid ComplainDTO complainDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
+
+        System.out.println(complainDTO.toString());
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("success",false);
+            return "redirect:/user-new-complain";
+        }
+
+        userService.createNewComplain(complainDTO);
+        redirectAttributes.addFlashAttribute("success", true);
+        return "redirect:/user-new-complain";
     }
 
     @GetMapping("/user-ongoing-complains")

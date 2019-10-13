@@ -1,12 +1,24 @@
 package YANmakes.complain.services;
 
+import YANmakes.complain.dao.ComplainDAO;
 import YANmakes.complain.dao.UserDAO;
+import YANmakes.complain.dto.ComplainDTO;
 import YANmakes.complain.dto.UserDTO;
+import YANmakes.complain.models.Complain;
 import YANmakes.complain.models.User;
+import YANmakes.complain.utils.ComplainStatus;
 import YANmakes.complain.utils.Gender;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +30,13 @@ public class UserService {
     private UserDAO userDAO;
 
     @Autowired
+    private ComplainDAO complainDAO;
+
+    @Autowired
     private ModelMapper getMapper;
+
+
+    private static String UPLOADED_FOLDER = "/Users/apple/Documents/files/";
 
     public UserDTO createNewUser(UserDTO userDTO){
 
@@ -59,5 +77,54 @@ public class UserService {
         }
 
         return userDTOS;
+    }
+
+    public ComplainDTO createNewComplain(ComplainDTO complainDTO) {
+
+        Complain complain  = getMapper.map(complainDTO, Complain.class);
+        complain.setStatus(ComplainStatus.NEW.getValue());
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+
+        complain.setDate(dtf.format(now));
+
+        if (!storeImage(complainDTO.getAttachment()).equals("Empty file"))
+          complain.setFile(storeImage(complainDTO.getAttachment()));
+
+
+        complain=complainDAO.save(complain);
+
+        complainDTO=getMapper.map(complain,ComplainDTO.class);
+
+
+        return complainDTO;
+
+    }
+
+    public String storeImage(MultipartFile file){
+
+        if (file.isEmpty())
+            return "Empty file";
+
+        Path path = null;
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+
+
+            Files.write(path, bytes);
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return path.toString();
+
+
     }
 }

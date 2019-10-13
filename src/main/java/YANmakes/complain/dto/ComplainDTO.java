@@ -1,12 +1,15 @@
 package YANmakes.complain.dto;
 
 import YANmakes.complain.utils.ComplainStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ComplainDTO {
 
     private int complainId;
 
     private String subject;
+
+    private String location;
 
     private String description;
 
@@ -15,6 +18,8 @@ public class ComplainDTO {
     private ComplainStatus status;
 
     private String file;
+
+    private MultipartFile attachment;
 
     public ComplainDTO() {
     }
@@ -33,6 +38,14 @@ public class ComplainDTO {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getDescription() {
@@ -67,11 +80,20 @@ public class ComplainDTO {
         this.file = file;
     }
 
+    public MultipartFile getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(MultipartFile attachment) {
+        this.attachment = attachment;
+    }
+
     @Override
     public String toString() {
         return "ComplainDTO{" +
                 "complainId=" + complainId +
                 ", subject='" + subject + '\'' +
+                ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", date='" + date + '\'' +
                 ", status=" + status +
