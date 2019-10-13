@@ -13,6 +13,7 @@
 	<script th:replace="police/fragments :: pop-up"> </script>
 
 
+
 </head>
 
 <body>
@@ -102,12 +103,10 @@
 
 											<td>
 
-												<a href="javascript:void(0);" onClick="popUpWindow('updatecomplaint.html');" title="Update order">
-													<button type="button" class="btn btn-primary">Take Action</button></td>
-											</a></td>
+													<a th:href="@{/assign-police(complainId=${complain.complainId})}" type="button" id="myBtn" class="btn btn-primary">Take Action</a></td>
+											</td>
 											<td colspan="4">
-												<a href="javascript:void(0);" onClick="popUpWindow('userprofile.html');" title="Update order">
-													<button type="button" class="btn btn-primary">View User Detials</button></a></td>
+													<a th:href="@{/reject(complainId=${complain.complainId})}" type="button" class="btn btn-primary">Reject</a></a></td>
 
 										</tr>
 
@@ -122,6 +121,9 @@
 					<!--/.content-->
 				</div>
 				<!--/.span9-->
+
+
+
 			</div>
 		</div>
 		<!--/.container-->
@@ -143,4 +145,7 @@
 			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
 		});
 	</script>
+
+
+
 </body>

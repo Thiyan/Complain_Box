@@ -1,10 +1,13 @@
 package YANmakes.complain.services;
 
 import YANmakes.complain.dao.ComplainDAO;
+import YANmakes.complain.dao.PoliceDAO;
 import YANmakes.complain.dao.UserDAO;
+import YANmakes.complain.dto.Assign;
 import YANmakes.complain.dto.ComplainDTO;
 import YANmakes.complain.dto.UserDTO;
 import YANmakes.complain.models.Complain;
+import YANmakes.complain.models.Police;
 import YANmakes.complain.models.User;
 import YANmakes.complain.utils.ComplainStatus;
 import YANmakes.complain.utils.Gender;
@@ -23,6 +26,9 @@ public class ComplainService {
 
     @Autowired
     private ComplainDAO complainDAO;
+
+    @Autowired
+    private PoliceDAO policeDAO;
 
     @Autowired
     private ModelMapper getMapper;
@@ -108,5 +114,40 @@ public class ComplainService {
         }
 
         return complainDTOS;
+    }
+
+    public boolean assignPolice(Assign assign) {
+
+        Complain complain=complainDAO.findByComplainId(assign.getComplainId());
+
+        Police police=policeDAO.findByPoliceId(assign.getOfficerId());
+
+        if(complain == null)
+            ;
+
+        complain.setPolice(police);
+        complain.setRemark(assign.getRemarks());
+
+        complain.setStatus(ComplainStatus.PENDING.getValue());
+
+        complainDAO.save(complain);
+
+
+        return true;
+
+    }
+
+    public boolean rejectComplain(int complainId) {
+
+        Complain complain=complainDAO.findByComplainId(complainId);
+
+        if(complain==null)
+            return false;
+
+        complain.setStatus(ComplainStatus.REJECTED.getValue());
+
+        complainDAO.save(complain);
+        return true;
+
     }
 }

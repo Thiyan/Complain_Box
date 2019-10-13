@@ -26,6 +26,9 @@ public class Complain {
     @Column(name = "file")
     private String file;
 
+    @Column(name = "remark")
+    private String remark;
+
     @ManyToOne
     private User user;
 
@@ -35,12 +38,15 @@ public class Complain {
     public Complain() {
     }
 
-    public Complain(String subject, String description, String date, String status, String file) {
+    public Complain(String subject, String description, String date, String status, String file, String remark, User user, Police police) {
         this.subject = subject;
         this.description = description;
         this.date = date;
         this.status = status;
         this.file = file;
+        this.remark = remark;
+        this.user = user;
+        this.police = police;
     }
 
     public int getComplainId() {
@@ -105,6 +111,14 @@ public class Complain {
 
     public void setPolice(Police police) {
         this.police = police;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     @Override
