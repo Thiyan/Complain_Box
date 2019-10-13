@@ -90,7 +90,7 @@ public class AdminController {
     }
 
     @RequestMapping("/admin-complain-details")
-    public String complainDetails(@RequestParam("id") String id, Model model){
+    public String complainDetails(@RequestParam("id") int id, Model model){
 
         model.addAttribute("complain",complainService.getComplain(id));
         return "admin/complaint-details";

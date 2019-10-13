@@ -53,7 +53,8 @@ public class UserController {
     public String ongoingComplainsUser(@RequestParam("id") int id,Model model){
 
 
-        model.addAttribute("complains", complainService.getComplainsByUser(id,"Pending"));
+        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"New"),
+                complainService.getComplainsByUser(id,"Pending")));
 
         return "user/inprocess-complaint";
     }
@@ -67,9 +68,9 @@ public class UserController {
     }
 
     @GetMapping("/user-complain-details")
-    public String complainsDetailsUser(Model model){
+    public String complainsDetailsUser(@RequestParam("id") int id, Model model){
 
-//        model.addAttribute("user", new UserDTO());
+        model.addAttribute("complain",complainService.getComplain(id));
         return "user/complaint-details";
     }
 

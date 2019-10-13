@@ -72,9 +72,9 @@ public class ComplainService {
 
     }
 
-    public ComplainDTO getComplain(String id) {
+    public ComplainDTO getComplain(int id) {
 
-        Complain complain=complainDAO.findByComplainId(Integer.parseInt(id));
+        Complain complain=complainDAO.findByComplainId(id);
 
         if(complain.equals(null) || complain==null)
             return new ComplainDTO();

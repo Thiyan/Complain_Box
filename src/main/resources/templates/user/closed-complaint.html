@@ -60,7 +60,7 @@
 											<td th:text="${complain.date}"></td>
 											<td th:text="${complain.status}"></td>
 
-											<td>   <a href="complaint-details.html"> View Details</a> 
+											<td>   <a th:href="@{/user-complain-details(id=${complain.complainId})}"> View Details</a>
 											</td>
 											</tr>
 											

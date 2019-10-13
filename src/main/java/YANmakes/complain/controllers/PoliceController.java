@@ -32,7 +32,7 @@ public class PoliceController {
     }
 
     @GetMapping("/police-complain-details")
-    public String ComplainDetail(@RequestParam("id") String id,Model model){
+    public String ComplainDetail(@RequestParam("id") int id,Model model){
 
         System.out.println(id);
         model.addAttribute("complain",complainService.getComplain(id));
