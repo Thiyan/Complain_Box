@@ -34,16 +34,26 @@ public class User {
     @JoinColumn(name = "user_id")
     private List<Complain> complains;
 
+    @ManyToOne
+    private Role role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "login_id", referencedColumnName = "id")
+    private Login login;
+
     public User() {
     }
 
-    public User(String name, String gender, String email, String contactNo, String city, String password) {
+    public User(String name, String gender, String email, String contactNo, String city, String password,
+                List<Complain> complains, Role role) {
         this.name = name;
         this.gender = gender;
         this.email = email;
         this.contactNo = contactNo;
         this.city = city;
         this.password = password;
+        this.complains = complains;
+        this.role = role;
     }
 
     public int getUserId() {
@@ -110,6 +120,22 @@ public class User {
         this.complains = complains;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -119,6 +145,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", contactNo='" + contactNo + '\'' +
                 ", city='" + city + '\'' +
+                ", password='" + password + '\'' +
+                ", complains=" + complains +
+//                ", role=" + role +
                 '}';
     }
 }

@@ -98,7 +98,7 @@
 											<td colspan="5">Police name</td>
 										</tr>
 
-										<tr>
+										<tr th:if="${#strings.toUpperCase(complain.status) == 'NEW'}">
 											<td><b>Action</b></td>
 
 											<td>

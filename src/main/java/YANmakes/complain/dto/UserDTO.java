@@ -1,8 +1,10 @@
 package YANmakes.complain.dto;
 
 import YANmakes.complain.utils.Gender;
+import YANmakes.complain.utils.Role;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,6 +30,7 @@ public class UserDTO {
 
     @Size(min = 6, max = 15, message = "Give a valid password")
     private String password;
+
 
     public UserDTO() {
     }
