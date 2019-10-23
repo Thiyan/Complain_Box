@@ -44,16 +44,26 @@ return true;
 		
 	  <div id="login-page">
 	  	<div class="container">
+
 	  	
-		      <form class="form-login" name="login" method="post">
+		      <form class="form-login" th:action="@{/login}" name="login" method="post">
+
+
 		        <h2 class="form-login-heading">sign in now - User</h2>
 		        <p style="padding-left:4%; padding-top:2%;  color:red">
 		        	</p>
 
+					  <div th:if="${error}" style="text-align: center;color: red;padding-top: 10px;padding-bottom: 0px">
+					<span >
+						Invalid username and password.
+					</span>
+					  </div>
+
+
 		        		<p style="padding-left:4%; padding-top:2%;  color:green">
 		        </p>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" name="email-address" placeholder="Eamil Address"  required autofocus>
+		            <input type="text" class="form-control" name="email" placeholder="Eamil Address"  required autofocus>
 		            <br>
 		            <input type="password" class="form-control" name="password" required placeholder="Password">
 		            <label class="checkbox">

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,21 @@ public class ComplainApplication {
 	@Bean
 	public ModelMapper getMapper(){
 		return new ModelMapper();
+	}
+
+	@Bean
+	PasswordEncoder getPasswordEncoder() {
+		return new PasswordEncoder() {
+			@Override
+			public String encode(CharSequence charSequence) {
+				return charSequence.toString();
+			}
+
+			@Override
+			public boolean matches(CharSequence charSequence, String s) {
+				return true;
+			}
+		};
 	}
 
 

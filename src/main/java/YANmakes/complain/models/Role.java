@@ -1,27 +1,20 @@
 package YANmakes.complain.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Role {
 
     @Id
+    @Column(name = "role_id")
     private int roleId;
 
+    @Column(name = "role_description")
     private String role;
 
-    @OneToMany
-    @JoinColumn(name = "roles_id")
-    private List<User> users;
-
-
-    @OneToMany
-    @JoinColumn(name = "role_id")
-    private List<Login> logins;
+//    @ManyToOne
+//    private List<Accounts> accounts;
 
     public Role() {
     }
@@ -42,19 +35,11 @@ public class Role {
         this.role = role;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public List<Login> getLogins() {
-        return logins;
-    }
-
-    public void setLogins(List<Login> logins) {
-        this.logins = logins;
-    }
+//    public List<Accounts> getAccounts() {
+//        return accounts;
+//    }
+//
+//    public void setAccounts(List<Accounts> accounts) {
+//        this.accounts = accounts;
+//    }
 }
