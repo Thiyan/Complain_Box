@@ -107,7 +107,7 @@ public class ComplainService {
 
 
         if(complains.isEmpty())
-            System.out.println("Empty");
+            return complainDTOS;
 
         for(Complain complain : complains){
             System.out.println("Reached");

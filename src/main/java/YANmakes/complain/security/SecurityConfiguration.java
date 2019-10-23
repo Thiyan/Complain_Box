@@ -24,6 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsservice userDetailsService;
 
+    @Autowired
+    private CustomLoginSuccessHandler successHandler;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,12 +43,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers( "/login","/admin-login","/police-login").permitAll()
-                .antMatchers("/").hasRole("USER")
+                .antMatchers( "/login").permitAll()
+                .antMatchers("/user-**").hasRole("USER")
+                .antMatchers("/police-**").hasRole("POLICE")
+                .antMatchers("/admin-**").hasRole("ADMIN")
                 .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/login-error")
-                .defaultSuccessUrl("/user-new-complain")
+                .loginPage("/login").failureUrl("/login?error=true")
+                .successHandler(successHandler)
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
