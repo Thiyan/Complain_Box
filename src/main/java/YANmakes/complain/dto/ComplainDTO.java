@@ -21,6 +21,8 @@ public class ComplainDTO {
 
     private MultipartFile attachment;
 
+    private String userID;
+
     public ComplainDTO() {
     }
 
@@ -86,6 +88,14 @@ public class ComplainDTO {
 
     public void setAttachment(MultipartFile attachment) {
         this.attachment = attachment;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     @Override

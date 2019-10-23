@@ -42,7 +42,7 @@ public class Account {
     private List<Complain> userComplains;
 
     @OneToMany
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "police_id")
     private List<Complain> policeComplains;
 
 
@@ -137,5 +137,21 @@ public class Account {
 
     public void setPoliceComplains(List<Complain> policeComplains) {
         this.policeComplains = policeComplains;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", contactNo='" + contactNo + '\'' +
+                ", city='" + city + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", userComplains=" + userComplains +
+                ", policeComplains=" + policeComplains +
+                '}';
     }
 }

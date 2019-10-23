@@ -33,12 +33,6 @@ public class UserController {
     @GetMapping("/user-new-complain")
     public String newComplain(Model model , HttpSession session){
 
-        System.out.println(session.getAttribute("userName"));
-        System.out.println(session.getAttribute("userNo"));
-        System.out.println(session.getAttribute("userEmail"));
-
-
-//        model.addAttribute("user", new UserDTO());
         return "user/register-complaint";
     }
 
@@ -58,30 +52,31 @@ public class UserController {
         return "redirect:/user-new-complain";
     }
 
-//    @GetMapping("/user-ongoing-complains")
-//    public String ongoingComplainsUser(@RequestParam("id") int id,Model model){
-//
-//
-//        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"New"),
-//                complainService.getComplainsByUser(id,"Pending")));
-//
-//        return "user/inprocess-complaint";
-//    }
-//
-//    @GetMapping("/user-closed-complains")
-//    public String closedComplainsUser(@RequestParam("id") int id, Model model){
-//
-//        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"Closed"),
-//                complainService.getComplainsByUser(id,"Rejected")));
-//        return "user/closed-complaint";
-//    }
-//
-//    @GetMapping("/user-complain-details")
-//    public String complainsDetailsUser(@RequestParam("id") int id, Model model){
-//
-//        model.addAttribute("complain",complainService.getComplain(id));
-//        return "user/complaint-details";
-//    }
+    @GetMapping("/user-ongoing-complains")
+    public String ongoingComplainsUser(@RequestParam("id") String id,Model model){
+
+
+        int i=Integer.parseInt(id);
+        model.addAttribute("complains", merge(complainService.getComplainsByUser(i,"New"),
+                complainService.getComplainsByUser(i,"Pending")));
+
+        return "user/inprocess-complaint";
+    }
+
+    @GetMapping("/user-closed-complains")
+    public String closedComplainsUser(@RequestParam("id") int id, Model model){
+
+        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"Closed"),
+                complainService.getComplainsByUser(id,"Rejected")));
+        return "user/closed-complaint";
+    }
+
+    @GetMapping("/user-complain-details")
+    public String complainsDetailsUser(@RequestParam("id") int id, Model model){
+
+        model.addAttribute("complain",complainService.getComplain(id));
+        return "user/complaint-details";
+    }
 
     @GetMapping("/new-user")
     public String newUser(Model model){

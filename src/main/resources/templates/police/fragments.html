@@ -30,8 +30,8 @@
 
             <div class="nav-collapse collapse navbar-inverse-collapse">
                 <ul class="nav pull-right">
-                    <li><a href="#">
-                        Police
+                    <li><a href="#" th:text="${session.userName}">
+                        $
                     </a></li>
                     <li class="nav-user dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -70,7 +70,7 @@
                             <ul id="togglePages" class="collapse unstyled">
 
                                 <li>
-                                    <a th:href="@{/police-ongoing-complains?id=1}">
+                                    <a th:href="@{/police-ongoing-complains?id=3">
                                         <i class="icon-tasks"></i>
                                         Ongoing Complaint
 

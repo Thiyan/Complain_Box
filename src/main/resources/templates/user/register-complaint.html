@@ -50,6 +50,9 @@
 								</div>
 
 								<form id="complain-form" th:action="@{/user-new-complain}" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+
+									<input type="hidden" class="form-control1" name="userID"  aria-describedby="subjectHelp" th:value="${session.userNo}">
+
 									<div class="form-group">
 										<label >Complain Subject *</label>
 										<input type="text" class="form-control1" name="subject" id="subject" aria-describedby="subjectHelp" placeholder="Enter subject">

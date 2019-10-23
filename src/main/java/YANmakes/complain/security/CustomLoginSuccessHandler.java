@@ -79,7 +79,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
             else if(authority.getAuthority().equals("ROLE_POLICE")) {
                 try {
-                    redirectStrategy.sendRedirect(request, response, "/police-ongoing-complains?id=1");
+                    redirectStrategy.sendRedirect(request, response, "/police-ongoing-complains?id="+session.getAttribute("userNo"));
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

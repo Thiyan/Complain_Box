@@ -40,23 +40,23 @@ public class PoliceController {
         model.addAttribute("complain",complainService.getComplain(id));
         return "police/complaint-details";
     }
-//
-//    @RequestMapping("/police-ongoing-complains")
-//    public String ongoingComplain(@RequestParam("id") String id,Model model){
-//        model.addAttribute("complains",complainService.getComplainsByPolice(id,"Pending"));
-//        return "police/inprocess-complaint";
-//    }
-//
-//    @RequestMapping("/police-closed-complains")
-//    public String closedComplain(@RequestParam("id") String id,Model model){
-//        model.addAttribute("complains",complainService.getComplainsByPolice(id,"Closed"));
-//
-//        return "police/closed-complaint";
-//    }
+
+    @RequestMapping("/police-ongoing-complains")
+    public String ongoingComplain(@RequestParam("id") String id,Model model){
+        model.addAttribute("complains",complainService.getComplainsByPolice(id,"Pending"));
+        return "police/inprocess-complaint";
+    }
+
+    @RequestMapping("/police-closed-complains")
+    public String closedComplain(@RequestParam("id") String id,Model model){
+        model.addAttribute("complains",complainService.getComplainsByPolice(id,"Closed"));
+
+        return "police/closed-complaint";
+    }
 
 
     @RequestMapping("/add-evidence")
-    public String assignPolice(@RequestParam int complainId, Model model){
+    public String addEvidence(@RequestParam int complainId, Model model){
 
         model.addAttribute("complainId",complainId);
         return "police/add-evidence";

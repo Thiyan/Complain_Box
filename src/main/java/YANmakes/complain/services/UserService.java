@@ -100,6 +100,7 @@ public class UserService {
 
     public ComplainDTO createNewComplain(ComplainDTO complainDTO) {
 
+
         Complain complain  = getMapper.map(complainDTO, Complain.class);
         complain.setStatus(ComplainStatus.NEW.getValue());
 
@@ -112,10 +113,19 @@ public class UserService {
           complain.setFile(storeImage(complainDTO.getAttachment()));
 
 
+        try {
+            int i=Integer.parseInt(complainDTO.getUserID());
+            Account account=accountsDAO.findByAccountId(i);
+            complain.setUser(account);
+
+        }
+        catch (Exception ex){
+            System.out.println("Exception");
+        }
+
         complain=complainDAO.save(complain);
 
         complainDTO=getMapper.map(complain,ComplainDTO.class);
-
 
         return complainDTO;
 

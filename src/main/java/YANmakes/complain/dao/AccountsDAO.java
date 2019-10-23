@@ -14,7 +14,6 @@ import java.util.Set;
 @Transactional
 public interface AccountsDAO extends CrudRepository<Account,Integer> {
 
-
     Optional<Account> findByEmail(String email);
 
     List<Account> findByRoles(Set<Role> roles);
