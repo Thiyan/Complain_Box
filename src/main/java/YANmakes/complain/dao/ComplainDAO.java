@@ -11,11 +11,11 @@ import java.util.List;
 @Transactional
 public interface ComplainDAO extends CrudRepository<Complain,Integer> {
 
-    List<Complain> findAllByPolicePoliceIdAndStatus(int id,String status);
+//    List<Complain> findAllByPolicePoliceIdAndStatus(int id,String status);
 
     Complain findByComplainId(int id);
 
     List<Complain> findByStatus(String status);
 
-    List<Complain> findAllByUserUserIdAndStatus(int id, String status);
+//    List<Complain> findAllByUserUserIdAndStatus(int id, String status);
 }

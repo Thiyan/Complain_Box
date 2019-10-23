@@ -1,6 +1,7 @@
 package YANmakes.complain.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,8 +16,17 @@ public class Account {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "gender")
+    private String gender;
+
     @Column(name = "email")
     private String email;
+
+    @Column(name = "contact")
+    private String contactNo;
+
+    @Column(name = "city")
+    private String city;
 
     @Column(name = "password")
     private String password;
@@ -25,6 +35,17 @@ public class Account {
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "accounts_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Complain> userComplains;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Complain> policeComplains;
+
+
 
     public Account() {
     }
@@ -76,5 +97,45 @@ public class Account {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public List<Complain> getUserComplains() {
+        return userComplains;
+    }
+
+    public void setUserComplains(List<Complain> userComplains) {
+        this.userComplains = userComplains;
+    }
+
+    public List<Complain> getPoliceComplains() {
+        return policeComplains;
+    }
+
+    public void setPoliceComplains(List<Complain> policeComplains) {
+        this.policeComplains = policeComplains;
     }
 }

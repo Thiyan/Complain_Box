@@ -36,16 +36,16 @@ public class Complain {
     private String document;
 
     @ManyToOne
-    private User user;
+    private Account user;
 
     @ManyToOne
-    private Police police;
+    private Account police;
 
     public Complain() {
     }
 
     public Complain(String subject, String description, String date, String status, String file,
-                    String remark, String officerRemark, String document, User user, Police police) {
+                    String remark, String officerRemark, String document, Account user, Account police) {
         this.subject = subject;
         this.description = description;
         this.date = date;
@@ -107,19 +107,19 @@ public class Complain {
         this.file = file;
     }
 
-    public User getUser() {
+    public Account getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Account user) {
         this.user = user;
     }
 
-    public Police getPolice() {
+    public Account getPolice() {
         return police;
     }
 
-    public void setPolice(Police police) {
+    public void setPolice(Account police) {
         this.police = police;
     }
 

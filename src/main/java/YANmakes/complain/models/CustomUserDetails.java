@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class CustomUserDetails extends Account implements UserDetails {
 
+
     public CustomUserDetails(final Account account) {
         super(account);
     }

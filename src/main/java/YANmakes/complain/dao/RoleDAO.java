@@ -8,4 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface RoleDAO extends CrudRepository<Role,Integer> {
+
+    Role findByRoleId(int id);
 }

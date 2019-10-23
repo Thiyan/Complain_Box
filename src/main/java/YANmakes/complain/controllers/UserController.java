@@ -5,6 +5,7 @@ import YANmakes.complain.dto.UserDTO;
 import YANmakes.complain.services.ComplainService;
 import YANmakes.complain.services.UserService;
 import YANmakes.complain.utils.Gender;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +31,21 @@ public class UserController {
     private ComplainService complainService;
 
     @GetMapping("/user-new-complain")
-    public String newComplain(Model model){
+    public String newComplain(Model model , HttpSession session){
+
+        System.out.println(session.getAttribute("userName"));
+        System.out.println(session.getAttribute("userNo"));
+        System.out.println(session.getAttribute("userEmail"));
+
 
 //        model.addAttribute("user", new UserDTO());
         return "user/register-complaint";
     }
 
     @PostMapping("/user-new-complain")
-    public String newComplainProcess(@Valid ComplainDTO complainDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
+    public String newComplainProcess(@Valid ComplainDTO complainDTO, BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes, Model model){
+
 
         System.out.println(complainDTO.toString());
         if(bindingResult.hasErrors()){
@@ -49,30 +58,30 @@ public class UserController {
         return "redirect:/user-new-complain";
     }
 
-    @GetMapping("/user-ongoing-complains")
-    public String ongoingComplainsUser(@RequestParam("id") int id,Model model){
-
-
-        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"New"),
-                complainService.getComplainsByUser(id,"Pending")));
-
-        return "user/inprocess-complaint";
-    }
-
-    @GetMapping("/user-closed-complains")
-    public String closedComplainsUser(@RequestParam("id") int id, Model model){
-
-        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"Closed"),
-                complainService.getComplainsByUser(id,"Rejected")));
-        return "user/closed-complaint";
-    }
-
-    @GetMapping("/user-complain-details")
-    public String complainsDetailsUser(@RequestParam("id") int id, Model model){
-
-        model.addAttribute("complain",complainService.getComplain(id));
-        return "user/complaint-details";
-    }
+//    @GetMapping("/user-ongoing-complains")
+//    public String ongoingComplainsUser(@RequestParam("id") int id,Model model){
+//
+//
+//        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"New"),
+//                complainService.getComplainsByUser(id,"Pending")));
+//
+//        return "user/inprocess-complaint";
+//    }
+//
+//    @GetMapping("/user-closed-complains")
+//    public String closedComplainsUser(@RequestParam("id") int id, Model model){
+//
+//        model.addAttribute("complains", merge(complainService.getComplainsByUser(id,"Closed"),
+//                complainService.getComplainsByUser(id,"Rejected")));
+//        return "user/closed-complaint";
+//    }
+//
+//    @GetMapping("/user-complain-details")
+//    public String complainsDetailsUser(@RequestParam("id") int id, Model model){
+//
+//        model.addAttribute("complain",complainService.getComplain(id));
+//        return "user/complaint-details";
+//    }
 
     @GetMapping("/new-user")
     public String newUser(Model model){
@@ -94,17 +103,17 @@ public class UserController {
         return "user/registration";
     }
 
-    @GetMapping("/validate-email")
-    @ResponseBody
-    public String validateEmail(HttpServletRequest request,Model model){
-        System.out.println("Triggered");
-        String email=request.getParameter("email");
-
-        if(email.equals("") || email==null)
-            return "Email must not be empty";
-
-        return userService.validateEmail(email);
-    }
+//    @GetMapping("/validate-email")
+//    @ResponseBody
+//    public String validateEmail(HttpServletRequest request,Model model){
+//        System.out.println("Triggered");
+//        String email=request.getParameter("email");
+//
+//        if(email.equals("") || email==null)
+//            return "Email must not be empty";
+//
+//        return userService.validateEmail(email);
+//    }
 
     // Generic function to join two lists in Java
     public <T> List<T> merge(List<T> list1, List<T> list2)

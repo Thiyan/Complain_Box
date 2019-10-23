@@ -1,11 +1,13 @@
 package YANmakes.complain.services;
 
+import YANmakes.complain.dao.AccountsDAO;
 import YANmakes.complain.dao.ComplainDAO;
-import YANmakes.complain.dao.UserDAO;
+import YANmakes.complain.dao.RoleDAO;
 import YANmakes.complain.dto.ComplainDTO;
 import YANmakes.complain.dto.UserDTO;
+import YANmakes.complain.models.Account;
 import YANmakes.complain.models.Complain;
-import YANmakes.complain.models.User;
+import YANmakes.complain.models.Role;
 import YANmakes.complain.utils.ComplainStatus;
 import YANmakes.complain.utils.Gender;
 import org.modelmapper.ModelMapper;
@@ -21,13 +23,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
 
+
     @Autowired
-    private UserDAO userDAO;
+    private AccountsDAO accountsDAO;
+
+    @Autowired
+    private RoleDAO roleDAO;
 
     @Autowired
     private ComplainDAO complainDAO;
@@ -40,36 +48,47 @@ public class UserService {
 
     public UserDTO createNewUser(UserDTO userDTO){
 
-        User user  = getMapper.map(userDTO, User.class);
+        Account account  = getMapper.map(userDTO, Account.class);
 
-        user.setGender(userDTO.getGender().getValue());
-        user=userDAO.save(user);
+        account.setGender(userDTO.getGender().getValue());
+        account=accountsDAO.save(account);
 
-        userDTO.setUserId(user.getUserId());
+        userDTO.setUserId(account.getAccountId());
 
         return userDTO;
 
     }
 
-    public String validateEmail(String email) {
-        boolean val=userDAO.existsByEmail(email);
+//    public String validateEmail(String email) {
+//        boolean val=userDAO.existsByEmail(email);
+//
+//        if(val)
+//            return "Duplicate";
+//
+//        return "Unique";
+//    }
 
-        if(val)
-            return "Duplicate";
-
-        return "Unique";
-    }
+    /*
+    * Done
+    * */
 
     public List<UserDTO> getAllUsers(){
 
         List<UserDTO> userDTOS=new ArrayList<>();
 
-        List<User> users= (List<User>) userDAO.findAll();
+        Set<Role> roles=new HashSet<>();
+
+        roles.add(roleDAO.findByRoleId(1));
+
+        roles.forEach(role -> System.out.println("Roles "+role));
+
+
+        List<Account> users= (List<Account>) accountsDAO.findByRoles(roles);
 
         if(users.isEmpty() || users==null)
             return new ArrayList<>();
 
-        for (User user:users){
+        for (Account user:users){
             UserDTO userDTO=getMapper.map(user,UserDTO.class);
             Gender gender=Gender.valueOf(user.getGender().toUpperCase());
             userDTO.setGender(gender);

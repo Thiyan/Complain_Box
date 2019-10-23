@@ -1,15 +1,14 @@
 package YANmakes.complain.services;
 
+import YANmakes.complain.dao.AccountsDAO;
 import YANmakes.complain.dao.ComplainDAO;
-import YANmakes.complain.dao.PoliceDAO;
-import YANmakes.complain.dao.UserDAO;
+
 import YANmakes.complain.dto.Assign;
 import YANmakes.complain.dto.ComplainDTO;
 import YANmakes.complain.dto.Evidence;
 import YANmakes.complain.dto.UserDTO;
+import YANmakes.complain.models.Account;
 import YANmakes.complain.models.Complain;
-import YANmakes.complain.models.Police;
-import YANmakes.complain.models.User;
 import YANmakes.complain.utils.ComplainStatus;
 import YANmakes.complain.utils.Gender;
 import org.modelmapper.ModelMapper;
@@ -22,14 +21,13 @@ import java.util.List;
 @Service
 public class ComplainService {
 
+
     @Autowired
-    private UserDAO userDAO;
+    private AccountsDAO accountsDAO;
 
     @Autowired
     private ComplainDAO complainDAO;
 
-    @Autowired
-    private PoliceDAO policeDAO;
 
     @Autowired
     private UserService userService;
@@ -41,46 +39,51 @@ public class ComplainService {
 
 
 
+//
+//    public List<ComplainDTO> getComplainsByPolice(String id, String status) {
+//
+//        complainDTOS=new ArrayList<>();
+//
+//        List<Complain> complains= (List<Complain>) complainDAO.findAllByPolicePoliceIdAndStatus(Integer.parseInt(id),status);
+//
+//        if(complains.isEmpty())
+//            System.out.println("Empty");
+//
+//        for(Complain complain : complains){
+//            System.out.println("Reached");
+//            ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
+//            complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
+//            complainDTOS.add(complainDTO);
+//        }
+//
+//        return complainDTOS;
+//
+//
+//    }
+//    public List<ComplainDTO> getComplainsByUser(int id, String status) {
+//
+//        complainDTOS=new ArrayList<>();
+//
+//        List<Complain> complains= (List<Complain>) complainDAO.findAllByUserUserIdAndStatus(id,status);
+//
+//        if(complains.isEmpty())
+//            return complainDTOS;
+//
+//        for(Complain complain : complains){
+//            System.out.println("Reached");
+//            ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
+//            complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
+//            complainDTOS.add(complainDTO);
+//        }
+//
+//        return complainDTOS;
+//
+//
+//    }
 
-    public List<ComplainDTO> getComplainsByPolice(String id, String status) {
-
-        complainDTOS=new ArrayList<>();
-
-        List<Complain> complains= (List<Complain>) complainDAO.findAllByPolicePoliceIdAndStatus(Integer.parseInt(id),status);
-
-        if(complains.isEmpty())
-            System.out.println("Empty");
-
-        for(Complain complain : complains){
-            System.out.println("Reached");
-            ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
-            complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
-            complainDTOS.add(complainDTO);
-        }
-
-        return complainDTOS;
-
-
-    }    public List<ComplainDTO> getComplainsByUser(int id, String status) {
-
-        complainDTOS=new ArrayList<>();
-
-        List<Complain> complains= (List<Complain>) complainDAO.findAllByUserUserIdAndStatus(id,status);
-
-        if(complains.isEmpty())
-            return complainDTOS;
-
-        for(Complain complain : complains){
-            System.out.println("Reached");
-            ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
-            complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
-            complainDTOS.add(complainDTO);
-        }
-
-        return complainDTOS;
-
-
-    }
+    /*
+    * Done
+    * */
 
     public ComplainDTO getComplain(int id) {
 
@@ -97,6 +100,10 @@ public class ComplainService {
 
 
     }
+
+    /*
+    * Done
+    * */
 
     public List<ComplainDTO> getComplainsByAdmin(String status) {
 
@@ -120,14 +127,19 @@ public class ComplainService {
         return complainDTOS;
     }
 
+
+    /*
+    * Done
+    * */
+
     public boolean assignPolice(Assign assign) {
 
         Complain complain=complainDAO.findByComplainId(assign.getComplainId());
 
-        Police police=policeDAO.findByPoliceId(assign.getOfficerId());
+        Account police=accountsDAO.findByAccountId(assign.getOfficerId());
 
         if(complain == null)
-            ;
+            return false;
 
         complain.setPolice(police);
         complain.setRemark(assign.getRemarks());
@@ -141,6 +153,10 @@ public class ComplainService {
 
     }
 
+
+    /*
+    * Done
+    * */
     public boolean rejectComplain(int complainId) {
 
         Complain complain=complainDAO.findByComplainId(complainId);
