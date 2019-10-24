@@ -42,8 +42,15 @@ public class ComplainService {
 
         complainDTOS=new ArrayList<>();
 
-        List<Complain> complains= (List<Complain>) complainDAO.findAllByPoliceAccountIdAndStatus(Integer.parseInt(id),status);
+        int i=Integer.parseInt(id);
 
+        System.out.println(i);
+
+        List<Complain> complains= (List<Complain>) complainDAO.findAllByPoliceAccountIdAndStatus(i,status);
+
+        complains.forEach(complain -> {
+            System.out.println(complain.toString());
+        });
 
 
         if(complains.isEmpty())
@@ -86,9 +93,9 @@ public class ComplainService {
     * Done
     * */
 
-    public ComplainDTO getComplain(int id) {
+    public ComplainDTO getComplain(String id) {
 
-        Complain complain=complainDAO.findByComplainId(id);
+        Complain complain=complainDAO.findByComplainId(Integer.parseInt(id));
 
         if(complain.equals(null) || complain==null)
             return new ComplainDTO();
@@ -118,10 +125,10 @@ public class ComplainService {
             return complainDTOS;
 
         for(Complain complain : complains){
-            System.out.println("Reached");
+
             ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
             complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
-            System.out.println(complainDTO.toString());
+            complainDTO.setPoliceName(complain.getPolice().getName());
             complainDTOS.add(complainDTO);
         }
 

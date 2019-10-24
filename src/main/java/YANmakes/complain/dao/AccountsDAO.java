@@ -19,4 +19,6 @@ public interface AccountsDAO extends CrudRepository<Account,Integer> {
     List<Account> findByRoles(Set<Role> roles);
 
     Account findByAccountId(int id);
+
+    boolean existsByEmail(String email);
 }

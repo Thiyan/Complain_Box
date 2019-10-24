@@ -43,7 +43,7 @@ public class UserController {
 
         System.out.println(complainDTO.toString());
         if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("success",false);
+            redirectAttributes.addFlashAttribute("sucess",false);
             return "redirect:/user-new-complain";
         }
 
@@ -72,7 +72,7 @@ public class UserController {
     }
 
     @GetMapping("/user-complain-details")
-    public String complainsDetailsUser(@RequestParam("id") int id, Model model){
+    public String complainsDetailsUser(@RequestParam("id") String id, Model model){
 
         model.addAttribute("complain",complainService.getComplain(id));
         return "user/complaint-details";
@@ -87,28 +87,33 @@ public class UserController {
     }
 
     @PostMapping("/new-user")
-    public String processNewUser(@ModelAttribute @Valid UserDTO userDTO, BindingResult bindingResult, Model model){
+    public String processNewUser(@ModelAttribute @Valid UserDTO userDTO, BindingResult bindingResult, Model model,
+                                 RedirectAttributes redirectAttributes){
 
         System.out.println("gahxgj" +userDTO.toString());
         if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("msg","Something went wrong.");
+
             return "redirect:/new-user";
         }
+
+        redirectAttributes.addFlashAttribute("msg","Account created successfully.");
 
         userService.createNewUser(userDTO);
         return "user/registration";
     }
 
-//    @GetMapping("/validate-email")
-//    @ResponseBody
-//    public String validateEmail(HttpServletRequest request,Model model){
-//        System.out.println("Triggered");
-//        String email=request.getParameter("email");
-//
-//        if(email.equals("") || email==null)
-//            return "Email must not be empty";
-//
-//        return userService.validateEmail(email);
-//    }
+    @GetMapping("/validate-email")
+    @ResponseBody
+    public String validateEmail(HttpServletRequest request,Model model){
+        System.out.println("Triggered");
+        String email=request.getParameter("email");
+
+        if(email.equals("") || email==null)
+            return "Email must not be empty";
+
+        return userService.validateEmail(email);
+    }
 
     // Generic function to join two lists in Java
     public <T> List<T> merge(List<T> list1, List<T> list2)

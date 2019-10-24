@@ -46,14 +46,14 @@ public class PoliceService {
 //
 //    }
 
-//    public String validateEmail(String email) {
-//        boolean val=userDAO.existsByEmail(email);
-//
-//        if(val)
-//            return "Duplicate";
-//
-//        return "Unique";
-//    }
+    public String validateEmail(String email) {
+        boolean val=accountsDAO.existsByEmail(email);
+
+        if(val)
+            return "Duplicate";
+
+        return "Unique";
+    }
 
     public List<PoliceDTO> getAllPolice(){
 

@@ -9,8 +9,6 @@ public class ComplainDTO {
 
     private String subject;
 
-    private String location;
-
     private String description;
 
     private String date;
@@ -22,6 +20,13 @@ public class ComplainDTO {
     private MultipartFile attachment;
 
     private String userID;
+
+    private String policeName;
+
+    private String remark;
+
+    private String OfficerRemark;
+
 
     public ComplainDTO() {
     }
@@ -42,13 +47,6 @@ public class ComplainDTO {
         this.subject = subject;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public String getDescription() {
         return description;
@@ -98,12 +96,35 @@ public class ComplainDTO {
         this.userID = userID;
     }
 
+    public String getPoliceName() {
+        return policeName;
+    }
+
+    public void setPoliceName(String policeName) {
+        this.policeName = policeName;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getOfficerRemark() {
+        return OfficerRemark;
+    }
+
+    public void setOfficerRemark(String officerRemark) {
+        OfficerRemark = officerRemark;
+    }
+
     @Override
     public String toString() {
         return "ComplainDTO{" +
                 "complainId=" + complainId +
                 ", subject='" + subject + '\'' +
-                ", location='" + location + '\'' +
                 ", description='" + description + '\'' +
                 ", date='" + date + '\'' +
                 ", status=" + status +

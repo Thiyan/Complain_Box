@@ -43,14 +43,14 @@ public class AdminController {
         return "admin/notprocess-complaint";
     }
 
-    @RequestMapping("/assign-police")
+    @RequestMapping("/admin-assign-police")
     public String assignPolice(@RequestParam int complainId, Model model){
 
         model.addAttribute("complainId",complainId);
         return "admin/assign-police";
     }
 
-    @PostMapping("/assign-police")
+    @PostMapping("/admin-assign-police")
     public String assignPoliceProcessing(@Valid Assign assign, RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model){
 
         System.out.println(assign.toString());
@@ -67,7 +67,7 @@ public class AdminController {
         return "redirect:/admin-new-complains";
     }
 
-    @GetMapping("/reject")
+    @GetMapping("/admin-reject")
     public String rejectComplain(@RequestParam("complainId") int complainId, RedirectAttributes redirectAttributes,Model model){
 
 
@@ -134,7 +134,7 @@ public class AdminController {
     @RequestMapping("/admin-complain-details")
     public String complainDetails(@RequestParam("id") int id, Model model){
 
-        model.addAttribute("complain",complainService.getComplain(id));
+        model.addAttribute("complain",complainService.getComplain(String.valueOf(id)));
         return "admin/complaint-details";
     }
 

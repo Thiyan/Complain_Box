@@ -70,7 +70,7 @@
                             <ul id="togglePages" class="collapse unstyled">
 
                                 <li>
-                                    <a th:href="@{/police-ongoing-complains?id=3">
+                                    <a th:href="@{/police-ongoing-complains(id=${session.userNo})}">
                                         <i class="icon-tasks"></i>
                                         Ongoing Complaint
 
@@ -79,7 +79,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/police-closed-complains?id=1}">
+                                    <a th:href="@{/police-closed-complains(id=${session.userNo})}">
                                         <i class="icon-tasks"></i>
                                         Closed Complaints
 

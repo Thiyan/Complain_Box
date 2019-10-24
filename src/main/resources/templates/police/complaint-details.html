@@ -70,11 +70,11 @@
 										
 										<tr>
 											<td><b>Remark Admin</b></td>
-											<td colspan="5"> remark admin</td>
+											<td colspan="5" th:text="${complain.remark}"> </td>
 										</tr>
 										<tr>
 											<td><b>Remark Officer</b></td>
-											<td colspan="5"> remark officer</td>
+											<td colspan="5" th:text="${complain.OfficerRemark}"></td>
 										</tr>
 										<tr>
 											<td><b>Status</b></td>
@@ -83,7 +83,7 @@
 
 										<tr>
 											<td><b>Assign Police</b></td>
-											<td colspan="5">Police name</td>
+											<td colspan="5" th:text="${policeName}"></td>
 										</tr>
 
 										<tr th:if="${#strings.toUpperCase(complain.status) == 'PENDING'}">
@@ -91,7 +91,7 @@
 
 											<td>
 
-													<a th:href="@{/add-evidence(complainId=${complain.complainId})}" type="button" class="btn btn-primary">Add Evidence</a></td>
+													<a th:href="@{/police-add-evidence(complainId=${complain.complainId})}" type="button" class="btn btn-primary">Add Evidence</a></td>
 											</a></td>
 
 

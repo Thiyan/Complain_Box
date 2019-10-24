@@ -2,6 +2,7 @@ package YANmakes.complain.controllers;
 
 import YANmakes.complain.services.ComplainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +26,10 @@ public class FileController {
     private ComplainService complainService;
 
     @RequestMapping(value = "/get-file", method = RequestMethod.GET)
+
     public void getFile(HttpServletResponse response, @RequestParam("id") int id) {
 
-        String fileUrl=complainService.getComplain(id).getFile();
+        String fileUrl=complainService.getComplain(String.valueOf(id)).getFile();
 
         try {
             // get your file as InputStream
@@ -35,9 +37,11 @@ public class FileController {
             File file = new File(fileUrl);
             InputStream is = new FileInputStream(file);
 
+//            response.setContentType(MediaType.IMAGE_JPEG_VALUE,MediaType.);
+
             // copy it to response's OutputStream
             org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
-            response.flushBuffer();
+//            response.flushBuffer();
         } catch (IOException ex) {
             // log.info("Error writing file to output stream. Filename was '{}'", "a", ex);
             throw new RuntimeException("IOError writing file to output stream");

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -34,7 +35,7 @@ public class PoliceController {
     }
 
     @GetMapping("/police-complain-details")
-    public String ComplainDetail(@RequestParam("id") int id,Model model){
+    public String ComplainDetail(@RequestParam("id") String id,Model model){
 
         System.out.println(id);
         model.addAttribute("complain",complainService.getComplain(id));
@@ -55,15 +56,16 @@ public class PoliceController {
     }
 
 
-    @RequestMapping("/add-evidence")
+    @RequestMapping("/police-add-evidence")
     public String addEvidence(@RequestParam int complainId, Model model){
 
         model.addAttribute("complainId",complainId);
         return "police/add-evidence";
     }
 
-    @PostMapping("/add-evidence")
-    public String assignEvidenceProcessing(@Valid Evidence evidence, RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model){
+    @PostMapping("/police-add-evidence")
+    public String assignEvidenceProcessing(@Valid Evidence evidence, RedirectAttributes redirectAttributes, BindingResult bindingResult,
+                                           HttpSession session,Model model){
 
         System.out.println(evidence.toString());
         if(bindingResult.hasErrors()){
@@ -73,11 +75,11 @@ public class PoliceController {
 
         if(!complainService.addEvidence(evidence)){
             redirectAttributes.addFlashAttribute("success",false);
-            return "redirect:/assign-police";
+            return "redirect:/police-complain-details?id="+evidence.getComplainId();
         }
 
         redirectAttributes.addFlashAttribute("success",true);
-        return "redirect:/admin-new-complains";
+        return "redirect:/police-ongoing-complains?id="+session.getAttribute("userNo");
     }
 
     @RequestMapping("/police-view-users")
@@ -87,17 +89,17 @@ public class PoliceController {
         return "police/manage-users";
     }
 
-//    @GetMapping("/validate-police-email")
-//    @ResponseBody
-//    public String validateEmail(HttpServletRequest request){
-//        System.out.println("Triggered");
-//        String email=request.getParameter("email");
-//
-//        if(email.equals("") || email==null)
-//            return "Email must not be empty";
-//
-//        return policeService.validateEmail(email);
-//    }
+    @GetMapping("/validate-police-email")
+    @ResponseBody
+    public String validateEmail(HttpServletRequest request){
+        System.out.println("Triggered");
+        String email=request.getParameter("email");
+
+        if(email.equals("") || email==null)
+            return "Email must not be empty";
+
+        return policeService.validateEmail(email);
+    }
 
 
 }

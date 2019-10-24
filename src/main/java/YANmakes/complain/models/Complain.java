@@ -159,8 +159,7 @@ public class Complain {
                 ", remark='" + remark + '\'' +
                 ", OfficerRemark='" + OfficerRemark + '\'' +
                 ", document='" + document + '\'' +
-                ", user=" + user +
-                ", police=" + police +
+
                 '}';
     }
 }

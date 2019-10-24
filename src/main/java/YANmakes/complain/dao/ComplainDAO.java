@@ -16,7 +16,7 @@ public interface ComplainDAO extends CrudRepository<Complain,Integer> {
 
     List<Complain> findByStatus(String status);
 
-    List<Complain> findAllByPoliceAccountIdAndStatus(int parseInt, String status);
+    List<Complain> findAllByPoliceAccountIdAndStatus(int id, String status);
 
     List<Complain> findAllByUserAccountIdAndStatus(int id, String status);
 }

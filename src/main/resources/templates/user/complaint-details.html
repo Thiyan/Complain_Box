@@ -42,19 +42,19 @@
 
 										<tr>
 											<td><b>Complaint Number</b></td>
-											<td colspan="5">153</td>
+											<td colspan="5" th:text="${complain.complainId}"></td>
 
 
 										</tr>
 
 										<tr>
 											<td><b>Complainant Name</b></td>
-											<td colspan="5"> test</td>
+											<td colspan="5" th:text="${complain.subject}"> </td>
 										</tr>
 
 										<tr>
 											<td><b>Reg Date</b></td>
-											<td colspan="5">15/25/2125
+											<td colspan="5" th:text="${complain.date}">
 											</td>
 										</tr>
 
@@ -62,16 +62,11 @@
 
 
 										</tr>
-										<tr>
-											<td><b>Place </b></td>
-											<td colspan="5">colombo</td>
 
-
-										</tr>
 										<tr>
 											<td><b>Complaint Details </b></td>
 
-											<td colspan="5">sss</td>
+											<td colspan="5" th:text="${complain.description}"></td>
 
 										</tr>
 
@@ -87,24 +82,21 @@
 
 										<tr>
 											<td><b>Remark Admin</b></td>
-											<td colspan="5"> remark admin</td>
+											<td colspan="5" th:text="${complain.remark}"> </td>
 										</tr>
 										<tr>
 											<td><b>Remark Officer</b></td>
-											<td colspan="5"> remark officer</td>
+											<td colspan="5" th:text="${complain.OfficerRemark}"></td>
 										</tr>
-										<tr>
-											<td><b>Approve</b></td>
-											<td colspan="5">yes</td>
-										</tr>
+
 										<tr>
 											<td><b>Status</b></td>
-											<td colspan="5">not process</td>
+											<td colspan="5" th:text="${complain.status}">not process</td>
 										</tr>
 
 										<tr>
 											<td><b>Responsible Police</b></td>
-											<td colspan="5">Police name</td>
+											<td colspan="5" th:text="${complain.policeName}">Police name</td>
 										</tr>
 									</tbody>
 
