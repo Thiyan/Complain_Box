@@ -36,7 +36,6 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Complain> userComplains;
@@ -44,7 +43,6 @@ public class Account {
     @OneToMany
     @JoinColumn(name = "police_id")
     private List<Complain> policeComplains;
-
 
 
     public Account() {

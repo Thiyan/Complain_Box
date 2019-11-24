@@ -105,7 +105,6 @@ public class AdminController {
 
     @RequestMapping("/admin-add-police")
     public String addPolice(Model model){
-        model.addAttribute("genderType", Gender.values());
 
         return "admin/add-police";
     }

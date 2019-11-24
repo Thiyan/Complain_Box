@@ -13,9 +13,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
+//@EnableWebMvc
 @EnableJpaRepositories(basePackageClasses = AccountsDAO.class)
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -44,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers( "/login").permitAll()
-                .antMatchers("/get-file**").permitAll()
+                .antMatchers("/get-file").permitAll()
                 .antMatchers("/user-**").hasRole("USER")
                 .antMatchers("/police-**").hasRole("POLICE")
                 .antMatchers("/admin-**").hasRole("ADMIN")
