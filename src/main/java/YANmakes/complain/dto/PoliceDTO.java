@@ -4,7 +4,7 @@ import YANmakes.complain.utils.Gender;
 
 public class PoliceDTO {
 
-    private int policeId;
+    private int accountId;
 
     private String name;
 
@@ -19,12 +19,12 @@ public class PoliceDTO {
     public PoliceDTO() {
     }
 
-    public int getPoliceId() {
-        return policeId;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setPoliceId(int policeId) {
-        this.policeId = policeId;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getName() {
@@ -70,7 +70,7 @@ public class PoliceDTO {
     @Override
     public String toString() {
         return "PoliceDTO{" +
-                "policeId=" + policeId +
+                "accountId=" + accountId +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 ", email='" + email + '\'' +

@@ -78,12 +78,11 @@ public class UserService {
 
         Set<Role> roles=new HashSet<>();
 
-        roles.add(roleDAO.findByRoleId(1));
 
         roles.forEach(role -> System.out.println("Roles "+role));
 
 
-        List<Account> users= (List<Account>) accountsDAO.findByRoles(roles);
+        List<Account> users= (List<Account>) accountsDAO.findByRolesRoleId(1);
 
         if(users.isEmpty() || users==null)
             return new ArrayList<>();

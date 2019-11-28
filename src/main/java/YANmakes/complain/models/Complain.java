@@ -147,6 +147,11 @@ public class Complain {
         this.document = document;
     }
 
+    public String join(){
+        return this.user.getName()+","+this.subject+","+this.description+","
+                +this.date+","+this.remark+","+this.police.getName()+","+this.OfficerRemark+"\n";
+    }
+
     @Override
     public String toString() {
         return "Complain{" +

@@ -16,7 +16,7 @@ public interface AccountsDAO extends CrudRepository<Account,Integer> {
 
     Optional<Account> findByEmail(String email);
 
-    List<Account> findByRoles(Set<Role> roles);
+    List<Account> findByRolesRoleId(int id);
 
     Account findByAccountId(int id);
 

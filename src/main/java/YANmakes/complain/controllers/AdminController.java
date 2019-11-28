@@ -113,7 +113,6 @@ public class AdminController {
     public String processAddPolice(@ModelAttribute @Valid PoliceDTO policeDTO, BindingResult bindingResult, Model model){
         model.addAttribute("genderType", Gender.values());
 
-        System.out.println("gahxgj" +policeDTO.toString());
         if(bindingResult.hasErrors()){
             return "redirect:/new-user";
         }
@@ -135,6 +134,16 @@ public class AdminController {
 
         model.addAttribute("complain",complainService.getComplain(String.valueOf(id)));
         return "admin/complaint-details";
+    }
+
+    @RequestMapping("/admin-csv")
+    public String generateCsvFile( RedirectAttributes redirectAttributes){
+
+        String result=complainService.exportCSV();
+
+        redirectAttributes.addFlashAttribute("result",result);
+        return "redirect:/admin-closed-complains";
+
     }
 
     public <T> List<T> merge(List<T> list1, List<T> list2)

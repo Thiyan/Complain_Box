@@ -15,8 +15,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ComplainService {
@@ -128,7 +131,8 @@ public class ComplainService {
 
             ComplainDTO complainDTO=getMapper.map(complain,ComplainDTO.class);
             complainDTO.setStatus(ComplainStatus.valueOf(complain.getStatus().toUpperCase()));
-            complainDTO.setPoliceName(complain.getPolice().getName());
+            if(complain.getPolice()!=null)
+                complainDTO.setPoliceName(complain.getPolice().getName());
             complainDTOS.add(complainDTO);
         }
 
@@ -197,6 +201,45 @@ public class ComplainService {
         complainDAO.save(complain);
 
         return true;
+
+    }
+
+    public String exportCSV()  {
+
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(System.getProperty("user.dir")+"/complains.csv");
+
+            String s="User Name,Subject,Description,Date,Admin Remark,Police Name,Police Remark \n";
+            writer.write(s);
+        } catch (IOException e) {
+            return "Something Went Wrong!!";
+        }
+
+        List<Complain> complains=complainDAO.findByStatus("Closed");
+
+        if(complains.isEmpty() || complains==null)
+            return "No data";
+
+        for(Complain c:complains){
+
+//            System.out.println(c.join());
+
+            try {
+                writer.write(c.join());
+
+            } catch (IOException e) {
+                return "Something Went Wrong!!";
+            }
+        }
+
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "File Created Successfully";
 
     }
 }

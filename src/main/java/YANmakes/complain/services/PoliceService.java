@@ -59,9 +59,9 @@ public class PoliceService {
 
         List<PoliceDTO> policeDTOS=new ArrayList<>();
 
-        roles.add(roleDAO.findByRoleId(2));
 
-        List<Account> polices= (List<Account>) accountsDAO.findByRoles(roles);
+
+        List<Account> polices= (List<Account>) accountsDAO.findByRolesRoleId(2);
 
         if(polices.isEmpty() || polices==null)
             return new ArrayList<>();
@@ -71,7 +71,11 @@ public class PoliceService {
             Gender gender=Gender.valueOf(police.getGender().toUpperCase());
             policeDTO.setGender(gender);
             policeDTOS.add(policeDTO);
+
+            System.out.println(policeDTO.toString());
         }
+
+
 
         return policeDTOS;
     }
@@ -94,7 +98,7 @@ public class PoliceService {
         police.setPassword("12345");
         police=accountsDAO.save(police);
 
-        policeDTO.setPoliceId(police.getAccountId());
+        policeDTO.setAccountId(police.getAccountId());
 
         return policeDTO;
     }

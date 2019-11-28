@@ -30,9 +30,14 @@
 
 	<div class="module">
 							<div class="module-head">
-								<h3>Not Approve Complaints</h3>
+								<h3>Closed Complaints</h3>
+							</div>
+							<div class="module-head">
+								<a th:href="@{/admin-csv}" type="button" class="btn btn-primary">Get CSV</a>
+								<span th:if="${result!= null}" class="alert alert-primary" th:text="${result}"></span>
 							</div>
 							<div class="module-body table">
+
 
 
 							
