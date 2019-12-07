@@ -5,6 +5,7 @@ import YANmakes.complain.dto.UserDTO;
 import YANmakes.complain.services.ComplainService;
 import YANmakes.complain.services.UserService;
 import YANmakes.complain.utils.Gender;
+import YANmakes.complain.utils.Location;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class UserController {
 
     @GetMapping("/user-new-complain")
     public String newComplain(Model model , HttpSession session){
+
+        model.addAttribute("locations", Location.values());
 
         return "user/register-complaint";
     }

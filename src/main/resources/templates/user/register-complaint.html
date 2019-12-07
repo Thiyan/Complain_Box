@@ -61,8 +61,12 @@
 
 									<div class="form-group">
 										<label >Location *</label>
-										<input type="text" class="form-control1" name="location" id="location"  placeholder="Enter location">
-									</div>
+										<select type="location" class="form-control" placeholder="location" id="location" name="location" >
+											<option th:each="location : ${locations}"
+													th:text="${location.value}"
+													th:value="${location}"></option>
+
+										</select>									</div>
 
 									<div class="form-group">
 										<label >Description *</label>
